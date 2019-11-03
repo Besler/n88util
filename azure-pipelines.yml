@@ -19,6 +19,10 @@ jobs:
     inputs:
         workingDirectory: 'build'
         cmakeArgs: '..'
+  - script: |
+      cd build
+      ctest -V
+    displayName: CTest
 
 - job: macOS
   pool:
