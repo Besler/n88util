@@ -7,6 +7,8 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
   steps:
+  - bash: echo "##vso[task.prependpath]$CONDA/bin"
+    displayName: Add conda to PATH
   - script: |
         conda create -y -n n88 python=3 boost
         source activate n88
