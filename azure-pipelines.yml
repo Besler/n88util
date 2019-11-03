@@ -8,7 +8,7 @@ jobs:
     vmImage: 'ubuntu-latest'
   steps:
   - script: |
-        conda create -n n88 python=3 boost
+        conda create -y -n n88 python=3 boost
         conda activate n88
     displayName: Setup conda
   - script: |
