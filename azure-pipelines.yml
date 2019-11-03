@@ -8,6 +8,13 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
   steps:
+  - task: CondaEnvironment@0
+    inputs:
+        environmentName: 'n88'
+        packageSpecs: 'python=3 boost'
+  - script: |
+      conda activate n88
+    displayName: Activate conda
   - script: |
       mkdir build
     displayName: Make Build Directories
