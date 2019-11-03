@@ -10,22 +10,17 @@ jobs:
   steps:
   - script: |
       mkdir build
-      cd build
-      ccmake ..
-      make
-      ctest -V
+    displayName: Make Build Directories
+  - task: CMake@1
+    inputs:
+        workingDirectory: 'build'
 
 - job: macOS
   displayName: macOS
   pool:
     vmImage: 'macOS-latest'
   steps:
-  - script: |
-      mkdir build
-      cd build
-      ccmake ..
-      make
-      ctest -V
+  - script: echo macOS
 
 - job: Windows
   displayName: Windows
