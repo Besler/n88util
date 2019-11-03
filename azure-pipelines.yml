@@ -18,7 +18,7 @@ jobs:
   - task: CMake@1
     inputs:
         workingDirectory: 'build'
-        cmakeArgs: '-GNinja ..'
+        cmakeArgs: '-GNinja -DENABLE_TESTING:BOOL=ON ..'
   - script: |
       cd build
       ninja
