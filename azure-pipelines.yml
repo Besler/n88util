@@ -7,7 +7,13 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
   steps:
-  - script: echo Ubuntu
+  - script: |
+    mkdir build
+    cd build
+    ccmake ..
+    make
+    ctest -V
+  displayName: Build and test
 
 - job: macOS
   pool:
