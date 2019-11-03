@@ -7,11 +7,9 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
   steps:
-  - script: sudo install -d -m 0777 /usr/local/miniconda/envs/
-    displayName: Fix Conda permissions
   - script: |
         conda create -y -n n88 python=3 boost
-        conda activate n88
+        source activate n88
     displayName: Setup conda
   - script: |
       mkdir build
