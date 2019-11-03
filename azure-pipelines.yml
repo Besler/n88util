@@ -13,6 +13,12 @@ jobs:
         sudo apt-get install libboost-all-dev ninja-build libgtest-dev -y
     displayName: apt-get
   - script: |
+        cd /usr/src/gtest
+        sudo cmake CMakeLists.txt
+        sudo make
+        sudo cp *.a /usr/lib
+    displayName: GTEST hot fix
+  - script: |
       mkdir build
     displayName: Make Build Directories
   - task: CMake@1
