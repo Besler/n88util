@@ -10,19 +10,20 @@ jobs:
   - bash: |
         sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
         sudo apt -y update
-        sudo apt-get install libboost-all-dev -y
-    displayName: Install boost
+        sudo apt-get install libboost-all-dev ninja-build -y
+    displayName: Install boost, ninja
   - script: |
       mkdir build
     displayName: Make Build Directories
   - task: CMake@1
     inputs:
         workingDirectory: 'build'
-        cmakeArgs: '..'
+        cmakeArgs: '-GNinja ..'
   - script: |
       cd build
+      ninja
       ctest -V
-    displayName: CTest
+    displayName: Make and CTest
 
 - job: macOS
   pool:
