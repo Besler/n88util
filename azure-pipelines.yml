@@ -10,8 +10,8 @@ jobs:
   - bash: |
         sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
         sudo apt -y update
-        sudo apt-get install libboost-all-dev ninja-build -y
-    displayName: Install boost, ninja
+        sudo apt-get install libboost-all-dev ninja-build libgtest-dev -y
+    displayName: apt-get
   - script: |
       mkdir build
     displayName: Make Build Directories
