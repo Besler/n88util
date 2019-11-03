@@ -7,7 +7,10 @@ jobs:
   pool:
     vmImage: 'ubuntu-latest'
   steps:
-  - bash: sudo apt-get install libboost-all-dev -y
+  - bash: |
+        sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+        sudo apt -y update
+        sudo apt-get install libboost-all-dev -y
     displayName: Install boost
   - script: |
       mkdir build
