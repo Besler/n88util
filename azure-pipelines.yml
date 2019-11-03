@@ -4,17 +4,13 @@ trigger:
 
 jobs:
 - job: Linux
-  displayName: Linux
   pool:
     vmImage: 'ubuntu-latest'
   steps:
-  - task: CondaEnvironment@0
-    inputs:
-        environmentName: 'n88'
-        packageSpecs: 'python=3 boost'
   - script: |
-      conda activate n88
-    displayName: Activate conda
+        conda create -n n88 python=3 boost
+        conda activate n88
+    displayName: Setup conda
   - script: |
       mkdir build
     displayName: Make Build Directories
@@ -24,14 +20,12 @@ jobs:
         cmakeArgs: '..'
 
 - job: macOS
-  displayName: macOS
   pool:
     vmImage: 'macOS-latest'
   steps:
   - script: echo macOS
 
 - job: Windows
-  displayName: Windows
   pool:
     vmImage: 'windows-latest'
   steps:
