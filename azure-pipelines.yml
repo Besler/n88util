@@ -4,6 +4,7 @@ trigger:
 
 jobs:
 - job: Linux
+  displayName: Linux
   pool:
     vmImage: 'ubuntu-latest'
   steps:
@@ -13,15 +14,21 @@ jobs:
       ccmake ..
       make
       ctest -V
-  displayName: Build and test
 
 - job: macOS
+  displayName: macOS
   pool:
     vmImage: 'macOS-latest'
   steps:
-  - script: echo Mac
+  - script: |
+      mkdir build
+      cd build
+      ccmake ..
+      make
+      ctest -V
 
 - job: Windows
+  displayName: Windows
   pool:
     vmImage: 'windows-latest'
   steps:
