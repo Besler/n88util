@@ -8,11 +8,11 @@ jobs:
     vmImage: 'ubuntu-latest'
   steps:
   - script: |
-    mkdir build
-    cd build
-    ccmake ..
-    make
-    ctest -V
+      mkdir build
+      cd build
+      ccmake ..
+      make
+      ctest -V
   displayName: Build and test
 
 - job: macOS
