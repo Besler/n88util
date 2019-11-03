@@ -1,0 +1,22 @@
+
+trigger:
+- master
+
+jobs:
+- job: Linux
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+  - script: echo Ubuntu
+
+- job: macOS
+  pool:
+    vmImage: 'macOS-latest'
+  steps:
+  - script: echo Mac
+
+- job: Windows
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+  - script: echo Windows
