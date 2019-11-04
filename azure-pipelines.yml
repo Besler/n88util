@@ -24,7 +24,7 @@ jobs:
   - task: CMake@1
     inputs:
         workingDirectory: 'build'
-        cmakeArgs: '-GNinja -DENABLE_TESTING:BOOL=ON ..'
+        cmakeArgs: '-GNinja -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING:BOOL=ON ..'
   - script: |
       cd build
       ninja
@@ -35,7 +35,9 @@ jobs:
   pool:
     vmImage: 'macOS-latest'
   steps:
-  - script: echo macOS
+  - script: |
+        brew install boost ninja gtest
+    displayName: Install dependancies
 
 - job: Windows
   pool:
