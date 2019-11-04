@@ -19,7 +19,7 @@ jobs:
     displayName: Conda build
   - task: CopyFiles@2
     inputs:
-        sourceFolder: /usr/local/miniconda/envs/n88/conda-bld/osx-64/
+        sourceFolder: /usr/share/miniconda/envs/n88/conda-bld/linux-64/
         contents: '*.tar.bz2'
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
     displayName: Copy conda build
