@@ -36,7 +36,7 @@ jobs:
   - bash: |
         echo "##vso[task.prependpath]$CONDA/bin"
         sudo chown -R $USER $CONDA
-    displayName: Add conda to path, change permissions
+    displayName: Add conda to path
   - script: |
         conda create -y -n n88 python=3 conda-build
     displayName: Setup conda
@@ -60,4 +60,24 @@ jobs:
   pool:
     vmImage: 'windows-latest'
   steps:
-  - script: echo Windows
+  - powershell: |
+        Write-Host "##vso[task.prependpath]$env:CONDA\Scripts"
+    displayName: Add conda to path
+  - script: |
+        conda create -y -n n88 python=3 conda-build
+    displayName: Setup conda
+  - script: |
+        call activate n88
+        conda-build conda-recipe/n88util/
+    displayName: Conda build
+  - task: CopyFiles@2
+    inputs:
+        sourceFolder: /usr/local/miniconda/envs/n88/conda-bld/osx-64/
+        contents: '*.tar.bz2'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    displayName: Copy conda build
+  - task: PublishBuildArtifacts@1
+    inputs:
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        artifactName: n88util-Windows
+    displayName: Publish artifact
