@@ -48,7 +48,7 @@ jobs:
   - script: |
         source activate n88
         cd build
-        ccmake -GNinja -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING:BOOL=ON ..
+        cmake -GNinja -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING:BOOL=ON ..
         ninja
     displayName: CMake and Ninja
   - script: |
