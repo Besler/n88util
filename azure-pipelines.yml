@@ -46,6 +46,17 @@ jobs:
         source activate n88
         conda-build conda-recipe/n88util/
     displayName: Conda build
+  - task: CopyFiles@2
+    inputs:
+        sourceFolder: /usr/local/miniconda/envs/n88/conda-bld/osx-64/
+        contents: '*.tar.bz2'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    displayName: Copy conda build
+  - task: PublishBuildArtifacts@1
+    inputs:
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        artifactName: n88util-macOS
+    displayName: Publish artifact
 
 - job: Windows
   pool:
