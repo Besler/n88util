@@ -35,9 +35,12 @@ jobs:
   pool:
     vmImage: 'macOS-latest'
   steps:
+  - bash: echo "##vso[task.prependpath]$CONDA/bin"
+    displayName: Add conda to PATH
   - script: |
-        brew install boost ninja gtest
-    displayName: Install dependancies
+        conda create -y -n n88 python=3 boost
+        source activate n88
+    displayName: Setup conda
 
 - job: Windows
   pool:
