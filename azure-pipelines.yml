@@ -40,22 +40,12 @@ jobs:
         sudo chown -R $USER $CONDA
     displayName: Add conda to path, change permissions
   - script: |
-        conda create -y -n n88 python=3 boost gtest ninja
+        conda create -y -n n88 python=3 conda-build
     displayName: Setup conda
   - script: |
-        mkdir build
-    displayName: Setup build
-  - script: |
         source activate n88
-        cd build
-        cmake -GNinja -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING:BOOL=ON ..
-        ninja
-    displayName: CMake and Ninja
-  - script: |
-        source activate n88
-        cd build
-        ctest -V
-    displayName: CTest
+        conda-build conda-recipe/n88util/
+    displayName: Conda build
 
 - job: Windows
   pool:
