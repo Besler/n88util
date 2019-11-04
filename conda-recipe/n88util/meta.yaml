@@ -21,11 +21,6 @@ requirements:
   run:
     - boost >=1.56.0
 
-test:
-  commands:
-    - conda inspect linkages -p ${PREFIX} n88util   # [not win]
-    - conda inspect objects -p ${PREFIX} n88util    # [osx]
-
 about:
   home: https://github.com/Numerics88/n88util
   license: MIT
