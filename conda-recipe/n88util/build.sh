@@ -2,6 +2,7 @@
 # Create build directory
 mkdir build
 cd build
+BUILD_CONFIG=Release
 
 # CMake
 cmake .. \

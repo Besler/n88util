@@ -2,12 +2,12 @@
 :: Create build directory
 mkdir build
 cd build
+set BUILD_CONFIG=Release
 
 :: CMake
 cmake .. ^
 	-G "Ninja" ^
 	-DCMAKE_BUILD_TYPE=%BUILD_CONFIG% ^
-	-DCMAKE_PREFIX_PATH=%LIBRARY_PREFIX% ^
 	-DCMAKE_INSTALL_PREFIX:PATH="%LIBRARY_PREFIX%" ^
 	-DENABLE_TESTING:BOOL=ON ^
 	-DBUILD_SHARED_LIBS:BOOL=ON
