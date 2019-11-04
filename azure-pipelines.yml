@@ -8,28 +8,26 @@ jobs:
     vmImage: 'ubuntu-latest'
   steps:
   - bash: |
-        sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-        sudo apt -y update
-        sudo apt-get install libboost-all-dev ninja-build libgtest-dev -y
-    displayName: apt-get
+        echo "##vso[task.prependpath]$CONDA/bin"
+    displayName: Add conda to path, change permissions
   - script: |
-        cd /usr/src/gtest
-        sudo cmake CMakeLists.txt
-        sudo make
-        sudo cp *.a /usr/lib
-    displayName: GTEST hot fix
+        conda create -y -n n88 python=3 conda-build
+    displayName: Setup conda
   - script: |
-      mkdir build
-    displayName: Make Build Directories
-  - task: CMake@1
+        source activate n88
+        conda-build conda-recipe/n88util/
+    displayName: Conda build
+  - task: CopyFiles@2
     inputs:
-        workingDirectory: 'build'
-        cmakeArgs: '-GNinja -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTING:BOOL=ON ..'
-  - script: |
-      cd build
-      ninja
-      ctest -V
-    displayName: Make and CTest
+        sourceFolder: /usr/local/miniconda/envs/n88/conda-bld/osx-64/
+        contents: '*.tar.bz2'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    displayName: Copy conda build
+  - task: PublishBuildArtifacts@1
+    inputs:
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        artifactName: n88util-Linux
+    displayName: Publish artifact
 
 - job: macOS
   pool:
