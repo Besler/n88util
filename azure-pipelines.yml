@@ -35,8 +35,10 @@ jobs:
   pool:
     vmImage: 'macOS-latest'
   steps:
-  - bash: echo "##vso[task.prependpath]$CONDA/bin"
-    displayName: Add conda to PATH
+  - bash: |
+        echo "##vso[task.prependpath]$CONDA/bin"
+        sudo chown -R $USER $CONDA
+    displayName: Add conda to path, chnage permissions
   - script: |
         conda create -y -n n88 python=3 boost
         source activate n88
